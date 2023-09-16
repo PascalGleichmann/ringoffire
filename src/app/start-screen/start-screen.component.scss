@@ -1,0 +1,30 @@
+.start-screen{
+    background-image: url('../../assets/img/startscreen.jpg');
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.startheadline{
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
+    width: 30rem;
+    object-fit: contain;
+}
+
+.startlabel {
+    position: absolute;
+    top: 65vh;
+    left: 10vw;
+    width: 15rem;
+
+    &:hover{
+        transition: 120ms ease-in-out;
+        transform: scale(1.2);
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
