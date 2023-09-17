@@ -7,15 +7,27 @@
     align-items: center;
 }
 
-.startbox-image {
+.startbox {
+    position: relative;
+    display: flex;
+    justify-content: center;
     height: 90%;
-    width: auto
+    min-height: 90%;
+    width: auto;
+    max-width: 100vw;
+}
+
+.startbox-image {
+    height: 100%;
+    width: 100%;
 }
 
 .startlabel {
+    max-width: 75%;
     position: absolute;
-    bottom: 10vh;
-    height: 5%;
+    bottom: 5vh;
+    height: auto;
+    width: 75%;
 
     &:hover {
         transition: 120ms ease-in-out;
