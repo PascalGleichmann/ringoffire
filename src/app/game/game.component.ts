@@ -6,11 +6,13 @@ import { Game } from '../models/game';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit{
-  pickCardAnimation = false;
-  game: Game | undefined;
+export class GameComponent implements OnInit {
 
-  ngOnInit(){
+  pickCardAnimation = false;
+  currentCard: string = '';
+  game!: Game;
+
+  ngOnInit() {
     this.newGame();
   }
 
@@ -20,6 +22,17 @@ export class GameComponent implements OnInit{
   }
 
   takeCard() {
-    this.pickCardAnimation = true;
+    if (!this.pickCardAnimation) {
+      this.currentCard = this.game.stack.pop() ?? 'card_empty';
+      this.pickCardAnimation = true;
+      setTimeout(() => {
+        this.game.playedCards.push(this.currentCard);
+        this.pickCardAnimation = false;
+      }, 1000);
+
+            
+      console.log('New Card: ' + this.currentCard);
+      console.log('Game is', this.game);
+    }
   }
 }
