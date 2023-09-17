@@ -1,0 +1,23 @@
+.board {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    background-image: url('../../assets/img/board.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-stack {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        position: absolute;
+        width: 10vw;
+    }
+}
