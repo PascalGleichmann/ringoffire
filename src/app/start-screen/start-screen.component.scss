@@ -1,27 +1,23 @@
-.start-screen{
-    background-image: url('../../assets/img/startscreen.jpg');
-    background-repeat: no-repeat;
-    background-position: center right;
-    background-size: cover;
+.start-screen {
+    background-color: #404040;
     height: 100%;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.startheadline{
-    position: absolute;
-    top: 10vh;
-    left: 10vw;
-    width: 30rem;
-    object-fit: contain;
+.startbox-image {
+    height: 90%;
+    width: auto
 }
 
 .startlabel {
     position: absolute;
-    top: 65vh;
-    left: 10vw;
-    width: 15rem;
+    bottom: 10vh;
+    height: 5%;
 
-    &:hover{
+    &:hover {
         transition: 120ms ease-in-out;
         transform: scale(1.2);
         opacity: 0.8;
