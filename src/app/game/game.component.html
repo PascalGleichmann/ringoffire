@@ -1,3 +1,5 @@
+<app-player *ngFor="let player of game.players; let i = index;" class="player-position" [name]="player"
+    [ngStyle]="{'top.vh': 10 + (i * 10)}"></app-player>
 <div class="board">
     <div class="card-stack">
         <!--card stack, new cards-->

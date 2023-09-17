@@ -1,0 +1,22 @@
+.player {
+    width: 20vw;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    background-color: rgba(105, 230, 226, 0.876);
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    opacity: 0.9;
+
+
+    span {
+        font-size: 1.75rem;
+        margin-left: 1rem;
+    }
+
+    img {
+        width: 4rem;
+        height: 4rem;
+        object-fit: cover;
+    }
+}
