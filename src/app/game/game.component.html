@@ -13,8 +13,10 @@
     </div>
 </div>
 
+<app-game-info class="info-card"></app-game-info>
+
 <app-player *ngFor="let player of game.players; let i = index;" class="player-position" [name]="player"
-[ngStyle]="{'top.vh': 10 + (i * 10)}"></app-player>
+[ngStyle]="{'top.vh': 10 + (i * 7)}" [playerActive]="i == game.currentPlayer"></app-player>
 
 <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
     <mat-icon>add</mat-icon>
