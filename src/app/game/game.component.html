@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<app-game-info class="info-card"></app-game-info>
+<app-game-info [card]="currentCard" class="info-card"></app-game-info>
 
 <app-player *ngFor="let player of game.players; let i = index;" class="player-position" [name]="player"
 [ngStyle]="{'top.vh': 10 + (i * 7)}" [playerActive]="i == game.currentPlayer"></app-player>
