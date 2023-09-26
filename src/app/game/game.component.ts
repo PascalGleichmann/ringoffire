@@ -2,8 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Game } from '../models/game';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Firestore, collection, collectionData, addDoc, onSnapshot, updateDoc, doc, deleteDoc, limit, orderBy, query, where } from '@angular/fire/firestore';
+import { Firestore, collectionData, addDoc, onSnapshot, updateDoc, doc, deleteDoc, limit, orderBy, query, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { collection } from 'firebase/firestore';
 
 
 @Component({
@@ -21,17 +22,21 @@ export class GameComponent implements OnInit {
 
   unsubGame: any;
 
-  constructor(public dialog: MatDialog) { 
+  constructor(public dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.newGame();
-    this.unsubGame = onSnapshot(collection(this.firestore, 'games'), (doc) => {
-      console.log("Backend saved game: ", doc);
-    });
+    this.unsubGame = this.loadCollectionFromFirestoreDatabase('games');
   }
 
-  ngOnDestroy(){
+  loadCollectionFromFirestoreDatabase(colId: string) {
+    const collectionInstance = collection(this.firestore, colId);
+    const queryInstance = query(collectionInstance); // Create a Firestore query
+    return collectionData(queryInstance).subscribe((game) => console.log("Backend saved game: ", game));
+  }
+
+  ngOnDestroy() {
     this.unsubGame();
   }
 
