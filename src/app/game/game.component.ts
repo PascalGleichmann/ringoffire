@@ -2,10 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Game } from '../models/game';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Firestore, collectionData, addDoc, onSnapshot, updateDoc, doc, deleteDoc, limit, orderBy, query, where } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, doc, query, onSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { collection } from 'firebase/firestore';
-
 
 @Component({
   selector: 'app-game',
@@ -25,24 +23,35 @@ export class GameComponent implements OnInit {
   constructor(public dialog: MatDialog) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.newGame();
     this.unsubGame = this.loadCollectionFromFirestoreDatabase('games');
   }
 
   loadCollectionFromFirestoreDatabase(colId: string) {
-    const collectionInstance = collection(this.firestore, colId);
-    const queryInstance = query(collectionInstance); // Create a Firestore query
-    return collectionData(queryInstance).subscribe((game) => console.log("Backend saved game: ", game));
+    return onSnapshot(this.getCollectionRef(colId), (game) => { console.log(game)});
+  }
+
+  getCollectionRef(colId: string) { // enter the collections Name as string
+    const aCollection = collection(this.firestore, colId);
+    return aCollection;
   }
 
   ngOnDestroy() {
     this.unsubGame();
   }
 
-  newGame() {
+  async newGame() {
     this.game = new Game();
     console.log("Local saved game: ", this.game);
+
+    /*
+    const docRef = await addDoc(collection(this.firestore, 'games'), this.game)
+      .catch
+      ((error) => { console.error(error) })
+      .then
+      (() => { console.log("Document written: ", docRef) });
+      */
   }
 
   takeCard() {
