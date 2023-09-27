@@ -1,7 +1,4 @@
 {
-  "projects": {
-    "default": "ring-of-fire-9d692"
-  },
   "targets": {
     "ring-of-fire-9d692": {
       "hosting": {
@@ -10,5 +7,8 @@
         ]
       }
     }
+  },
+  "projects": {
+    "default": "ring-of-fire-9d692"
   }
 }
