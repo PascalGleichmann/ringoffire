@@ -3,7 +3,7 @@ import { Game } from '../models/game';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FirebaseApp } from '@angular/fire/app';
-import { Firestore, collectionData, collection, onSnapshot, doc, addDoc, docData, CollectionReference, DocumentReference } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, onSnapshot, doc, addDoc, docData, CollectionReference, DocumentReference, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -18,12 +18,11 @@ export class GameComponent {
   game: Game = new Game();
   gameDocId!: string;
   collectionInstance!: CollectionReference;
-  documentInstance!: DocumentReference;
 
   constructor(public dialog: MatDialog, private firestore: Firestore, private route: ActivatedRoute) {
     this.collectionInstance = collection(this.firestore, 'games');
     this.route.params.subscribe((params) => {
-      this.documentInstance = params['id'];
+      this.gameDocId = params['id'];
       this.getGame(params['id']);
     });
   }
@@ -65,8 +64,13 @@ export class GameComponent {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
+        this.saveGame();
       }
     });
+  }
+
+  async saveGame() {
+    await updateDoc(doc(collection(this.firestore, 'games'), this.gameDocId), this.game.toJson()).catch((error => { console.error(error) }));
   }
 }
 

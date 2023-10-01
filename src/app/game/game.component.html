@@ -1,6 +1,3 @@
-<app-player *ngFor="let player of game.players; let i = index;" class="player-position" [name]="player"
-    [ngStyle]="{'top.vh': 10 + (i * 7)}" [playerActive]="i == game.currentPlayer"></app-player>
-
 <div class="board">
     <div class="card-stack">
         <!--card stack, new cards-->
@@ -15,6 +12,9 @@
             src="../../assets/img/cards/{{ game.currentCard }}.png">
     </div>
 </div>
+
+<app-player *ngFor="let player of game.players; let i = index;" class="player-position" [name]="player"
+    [ngStyle]="{'top.vh': 10 + (i * 7)}" [playerActive]="i == game.currentPlayer"></app-player>
 
 <app-game-info [card]="game.currentCard" class="info-card"></app-game-info>
 
